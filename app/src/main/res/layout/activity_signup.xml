@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/signup_username"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:autofillHints="username"
@@ -27,25 +27,25 @@
         android:hint="@string/username"
         android:inputType="textPersonName"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="#90CAF9"
         android:textColorHint="#90CAF9" />
 
     <EditText
         android:id="@+id/signup_email"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:autofillHints="emailAddress"
         android:background="@drawable/et_background"
         android:hint="@string/email"
-        android:autofillHints="emailAddress"
         android:inputType="textEmailAddress"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="#90CAF9"
         android:textColorHint="#90CAF9" />
 
     <EditText
         android:id="@+id/signup_password"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:autofillHints=""
@@ -53,25 +53,25 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="#90CAF9"
         android:textColorHint="#90CAF9" />
 
     <EditText
         android:id="@+id/signup_confirm_password"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:autofillHints="confirmPassword"
         android:background="@drawable/et_background"
         android:hint="@string/confirm_password"
-        android:autofillHints="confirmPassword"
         android:inputType="textPassword"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="#90CAF9"
         android:textColorHint="#90CAF9" />
 
     <Button
         android:id="@+id/btn_signup"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_rounded_gray"

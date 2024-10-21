@@ -19,36 +19,36 @@
 
     <EditText
         android:id="@+id/login_email"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:autofillHints="emailAddress"
         android:background="@drawable/et_background"
         android:hint="@string/email"
-        android:autofillHints="emailAddress"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="#90CAF9"
         android:textColorHint="#90CAF9" />
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="match_parent"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:autofillHints="password"
         android:background="@drawable/et_background"
         android:hint="@string/password"
-        android:autofillHints="password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:padding="12dp"
-        android:textColor="@color/white"
+        android:textColor="#90CAF9"
         android:textColorHint="#90CAF9" />
 
     <!-- Login Button -->
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_rounded_gray"
