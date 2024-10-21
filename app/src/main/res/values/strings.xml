@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">PennyWise</string>
+    <string name="log_in">LOG IN</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="pennywise_logo">PennyWise Logo</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign up!</string>
+    <string name="balance">₱13,227.85</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log in!</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
+    <string name="totalExpenses">Total Expenses: ₱1,000.52</string>
+    <string name="welcomeMessage">WELCOME BACK TO PENNYWISE, USER!</string>
 </resources>

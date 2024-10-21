@@ -9,7 +9,7 @@
         android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WELCOME BACK TO PENNYWISE, <USERNAME>!"
+        android:text="@string/welcomeMessage"
         android:textSize="20sp"
         android:gravity="center"/>
 
@@ -17,7 +17,7 @@
         android:id="@+id/balance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="₱13,227.85"
+        android:text="@string/balance"
         android:textSize="24sp"
         android:textColor="@android:color/holo_green_dark"
         android:layout_marginTop="16dp"/>
@@ -26,7 +26,7 @@
         android:id="@+id/total_expenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Expenses: ₱1,000.52"
+        android:text="@string/totalExpenses"
         android:layout_marginTop="8dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -39,6 +39,6 @@
         android:id="@+id/btn_add_transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Transaction"
+        android:text="@string/add_transaction"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
