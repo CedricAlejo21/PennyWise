@@ -1,54 +1,75 @@
 package com.mobdeve.mco.pennywise
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddTransactionActivity : ComponentActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_transaction)
 
-        findViewById<Button>(R.id.btn_done).setOnClickListener {
+        firebaseAuth = FirebaseAuth.getInstance()
+        val addButton = findViewById<Button>(R.id.btn_done)
+
+        addButton.setOnClickListener {
             val description = findViewById<EditText>(R.id.transaction_description).text.toString()
             val category = findViewById<EditText>(R.id.transaction_category).text.toString()
-            val price = findViewById<EditText>(R.id.transaction_price).text.toString().toDoubleOrNull()
+            val price = findViewById<EditText>(R.id.transaction_price).text.toString().toDoubleOrNull() ?: 0.0
             val location = findViewById<EditText>(R.id.transaction_location).text.toString()
 
-            if (price == null) {
-                Toast.makeText(this, "Enter a valid price!", Toast.LENGTH_SHORT).show()
+            if (description.isNotEmpty() && category.isNotEmpty() && price > 0 && location.isNotEmpty()) {
+                saveTransaction(description, category, price, location)
             } else {
-                addTransaction(description, category, price, location)
+                Toast.makeText(this, "Please fill in all fields!", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun addTransaction(description: String, category: String, price: Double, location: String) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val dbRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("transactions")
+    private fun saveTransaction(description: String, category: String, price: Double, location: String) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+            val transactionId = FirebaseDatabase.getInstance().getReference("users/$uid/transactions").push().key
 
-        val transactionId = dbRef.push().key
-        val transaction = mapOf(
-            "id" to transactionId,
-            "description" to description,
-            "category" to category,
-            "price" to price,
-            "location" to location
-        )
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val currentDate = sdf.format(Date())
 
-        transactionId?.let {
-            dbRef.child(it).setValue(transaction)
+            val transaction = mapOf(
+                "description" to description,
+                "category" to category,
+                "price" to price,
+                "location" to location,
+                "date" to currentDate
+            )
+
+            Log.d("AddTransactionActivity", "Transaction Data Prepared: $transaction")
+
+            val databaseRef = FirebaseDatabase.getInstance("https://pennywise-f2ed7-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("users/$uid/transactions/$transactionId")
+
+            databaseRef.setValue(transaction)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Transaction Added Successfully!", Toast.LENGTH_SHORT).show()
-                    finish() // Return to previous screen
+                    Log.d("AddTransactionActivity", "Transaction saved successfully: $transaction")
+                    Toast.makeText(this, "Transaction added successfully!", Toast.LENGTH_SHORT).show()
+                    finish() // Return to the previous screen
                 }
-                .addOnFailureListener { error ->
-                    Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener { exception ->
+                    Log.e("AddTransactionActivity", "Failed to save transaction: ${exception.message}")
+                    Toast.makeText(this, "Failed to add transaction.", Toast.LENGTH_SHORT).show()
                 }
+        }else {
+            Log.e("AddTransactionActivity", "User is not logged in!")
+            Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show()
         }
     }
 }
