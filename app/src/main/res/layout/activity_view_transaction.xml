@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#212121"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -9,36 +9,41 @@
         android:id="@+id/transaction_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Transaction Details"
-        android:textSize="20sp"
         android:layout_gravity="center"
-        android:paddingBottom="24dp"/>
+        android:paddingBottom="24dp"
+        android:text="Transaction Details"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Category: Food"
-        android:layout_marginTop="16dp"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Description: 24 chicken"
-        android:layout_marginTop="8dp"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Price: ₱150.00"
-        android:layout_marginTop="8dp"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Location: Agno"
-        android:layout_marginTop="8dp"/>
+        android:textColor="#FFFFFF" />
 </LinearLayout>

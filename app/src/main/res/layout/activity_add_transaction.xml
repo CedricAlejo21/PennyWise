@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#212121"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -9,34 +9,39 @@
         android:id="@+id/transaction_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"/>
+        android:hint="Description"
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/transaction_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Category"
-        android:layout_marginTop="16dp"/>
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/transaction_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Price"
         android:inputType="numberDecimal"
-        android:layout_marginTop="16dp"/>
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/transaction_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Location"
-        android:layout_marginTop="16dp"/>
+        android:textColorHint="#8E8E8E" />
 
     <Button
         android:id="@+id/btn_done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_rounded_blue"
+        android:text="Done" />
 </LinearLayout>

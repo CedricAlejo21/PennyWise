@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#212121"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -9,19 +9,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@drawable/white_rounded_bg"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/welcome_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="Welcome Back to PennyWise, User!"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginEnd="8dp" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/profile_picture"
@@ -35,42 +35,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
         android:background="@drawable/white_rounded_bg"
-        android:padding="16dp"
-        android:layout_marginTop="16dp">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/balance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="₱13,227.85"
-            android:textSize="24sp"
             android:textColor="@android:color/holo_green_dark"
-            android:layout_marginEnd="8dp" />
+            android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/total_expenses"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Expenses: ₱1,000.52"
-            android:textSize="16sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/total_expenses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Expenses: ₱1,000.52"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/total_expenses2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Transactions: 20"
+                android:textSize="16sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- Transactions Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_toggle_transactions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_rounded_blue"
+            android:padding="2dp"
             android:text="Show Transactions"
-            android:layout_marginBottom="8dp" />
+            android:textColor="#FFFFFF" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/transactions_recycler_view"
@@ -84,10 +101,11 @@
         android:id="@+id/btn_add_transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Transaction"
-        android:backgroundTint="@android:color/holo_purple"
-        android:textColor="@android:color/white"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_rounded_blue"
+        android:backgroundTint="#4682B4"
+        android:text="Add Transaction"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
