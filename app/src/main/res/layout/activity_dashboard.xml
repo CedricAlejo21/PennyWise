@@ -63,7 +63,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/total_expenses2"
+                android:id="@+id/total_transactions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Transactions: 20"
@@ -107,5 +107,16 @@
         android:backgroundTint="#4682B4"
         android:text="Add Transaction"
         android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/category_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:background="@drawable/white_rounded_bg"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:text="Category Totals will appear here" />
 
 </LinearLayout>

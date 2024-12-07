@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import com.google.firebase.database.*
 
 class DashboardActivity : ComponentActivity() {
@@ -60,6 +61,7 @@ class DashboardActivity : ComponentActivity() {
                 .getReference("users").child(uid)
 
             fetchTransactions()
+            calculateTotalSpendingByCategory() // Add this here
         } else {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show()
             finish()
@@ -70,18 +72,37 @@ class DashboardActivity : ComponentActivity() {
         databaseRef.child("transactions").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val transactionList = ArrayList<Transaction>()
+                var totalExpenses = 0.0
+                val categoryTotals = mutableMapOf<String, Double>()
+
                 for (transactionSnapshot in snapshot.children) {
                     val transaction = transactionSnapshot.getValue(Transaction::class.java)
                     if (transaction != null) {
                         transactionList.add(transaction)
+
+                        // Accumulate total expenses
+                        val price = transaction.price ?: 0.0
+                        totalExpenses += price
+
+                        // Accumulate totals per category
+                        val category = transaction.category ?: "Uncategorized"
+                        categoryTotals[category] = categoryTotals.getOrDefault(category, 0.0) + price
                     }
                 }
+
                 // Check if transactionsRecyclerView is initialized before using it
                 if (this@DashboardActivity::transactionsRecyclerView.isInitialized) {
                     transactionsRecyclerView.adapter = TransactionsAdapter(transactionList)
                 } else {
                     Log.e("DashboardActivity", "transactionsRecyclerView not initialized")
                 }
+
+                // Update RecyclerView
+                transactionsRecyclerView.adapter = TransactionsAdapter(transactionList)
+
+                // Update totals and category display
+                updateBalanceAndTransactions(totalExpenses, transactionList.size)
+                displayCategoryTotals(categoryTotals)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -111,4 +132,60 @@ class DashboardActivity : ComponentActivity() {
             }
         })
     }
+
+    private fun calculateTotalSpendingByCategory() {
+        val uid = firebaseAuth.currentUser?.uid ?: return
+        val databaseRef = FirebaseDatabase.getInstance("https://pennywise-f2ed7-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("users/$uid/transactions")
+
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val categoryTotals = mutableMapOf<String, Double>()
+
+                for (transactionSnapshot in snapshot.children) {
+                    val category = transactionSnapshot.child("category").getValue(String::class.java)
+                    val price = transactionSnapshot.child("price").getValue(Double::class.java)
+
+                    if (category != null && price != null) {
+                        categoryTotals[category] = categoryTotals.getOrDefault(category, 0.0) + price
+                    } else {
+                        Log.w("DashboardActivity", "Invalid transaction data: $transactionSnapshot")
+                    }
+                }
+
+                displayCategoryTotals(categoryTotals)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("DashboardActivity", "Failed to fetch transactions: ${error.message}")
+            }
+        })
+    }
+
+    private fun displayCategoryTotals(categoryTotals: Map<String, Double>) {
+        val categorySummaryTextView: TextView = findViewById(R.id.category_summary)
+        val stringBuilder = StringBuilder()
+
+        if (categoryTotals.isEmpty()) {
+            stringBuilder.append("No transactions to display.")
+        } else {
+            categoryTotals.forEach { (category, total) ->
+                stringBuilder.append("$category: ₱${String.format("%.2f", total)}\n")
+            }
+        }
+
+        categorySummaryTextView.text = stringBuilder.toString()
+    }
+
+    private fun updateBalanceAndTransactions(totalExpenses: Double, transactionCount: Int) {
+        val balanceTextView: TextView = findViewById(R.id.balance)
+        val totalExpensesTextView: TextView = findViewById(R.id.total_expenses)
+        val totalTransactionsTextView: TextView = findViewById(R.id.total_transactions)
+
+        // Update UI elements
+        balanceTextView.text = "₱${String.format("%.2f", 13227.85 - totalExpenses)}"
+        totalExpensesTextView.text = "Total Expenses: ₱${String.format("%.2f", totalExpenses)}"
+        totalTransactionsTextView.text = "Total Transactions: $transactionCount"
+    }
+
 }
