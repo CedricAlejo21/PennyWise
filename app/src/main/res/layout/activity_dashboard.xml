@@ -113,10 +113,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:padding="8dp"
         android:background="@drawable/white_rounded_bg"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:text="Category Totals will appear here" />
+        android:gravity="center|left"
+        android:padding="8dp"
+        android:text="Category Totals will appear here"
+        android:textColor="#808080"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/category_summary2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_rounded_bg"
+        android:gravity="center|left"
+        android:padding="8dp"
+        android:text="Placeholder for Chart"
+        android:textColor="#808080"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_delete_account2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_rounded_red"
+        android:text="Delete Account"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_logout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_rounded_blue"
+        android:text="LOG OUT"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

@@ -75,4 +75,5 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.2.3")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
