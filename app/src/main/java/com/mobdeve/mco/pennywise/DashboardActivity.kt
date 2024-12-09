@@ -147,17 +147,12 @@ class DashboardActivity : ComponentActivity() {
                     }
                 }
 
-                // Check if transactionsRecyclerView is initialized before using it
                 if (this@DashboardActivity::transactionsRecyclerView.isInitialized) {
                     transactionsRecyclerView.adapter = TransactionsAdapter(transactionList)
                 } else {
                     Log.e("DashboardActivity", "transactionsRecyclerView not initialized")
                 }
-
-                // Update RecyclerView
                 transactionsRecyclerView.adapter = TransactionsAdapter(transactionList)
-
-                // Update totals and category display
                 updateBalanceAndTransactions(totalExpenses, transactionList.size)
                 displayCategoryTotals(categoryTotals)
             }
@@ -261,7 +256,6 @@ class DashboardActivity : ComponentActivity() {
         val totalExpensesTextView: TextView = findViewById(R.id.total_expenses)
         val totalTransactionsTextView: TextView = findViewById(R.id.total_transactions)
 
-        // Update UI elements
         balanceTextView.text = "₱${String.format("%.2f", 0 - totalExpenses)}"
         totalExpensesTextView.text = "Total Expenses: ₱${String.format("%.2f", totalExpenses)}"
         totalTransactionsTextView.text = "Total Transactions: $transactionCount"
