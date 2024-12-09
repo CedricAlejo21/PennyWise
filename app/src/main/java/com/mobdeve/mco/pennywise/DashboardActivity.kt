@@ -226,6 +226,28 @@ class DashboardActivity : ComponentActivity() {
         }
 
         categorySummaryTextView.text = stringBuilder.toString()
+        updateBarChart(categoryTotals)
+    }
+
+    private fun updateBarChart(categoryTotals: Map<String, Double>) {
+        val barChart = findViewById<BarChart>(R.id.category_summary2)
+        val entries = ArrayList<BarEntry>()
+        var index = 1f
+
+        categoryTotals.forEach { (_, total) ->
+            entries.add(BarEntry(index, total.toFloat()))
+            index += 1f
+        }
+
+        val dataSet = BarDataSet(entries, "Total Spending per Category")
+        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
+
+
+        val barData = BarData(dataSet)
+        barChart.data = barData
+        barChart.description.text = "Total Spending per Category"
+        barChart.xAxis.setDrawLabels(false)
+        barChart.invalidate()
     }
 
     private fun updateBalanceAndTransactions(totalExpenses: Double, transactionCount: Int) {
