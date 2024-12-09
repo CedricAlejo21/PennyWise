@@ -138,13 +138,12 @@ class DashboardActivity : ComponentActivity() {
                     if (transaction != null) {
                         transactionList.add(transaction)
 
-                        // Accumulate total expenses
                         val price = transaction.price ?: 0.0
                         totalExpenses += price
-
-                        // Accumulate totals per category
                         val category = transaction.category ?: "Uncategorized"
                         categoryTotals[category] = categoryTotals.getOrDefault(category, 0.0) + price
+                        val date = transactionSnapshot.child("date").getValue(String::class.java)
+                        Log.d("DashboardActivity", "Transaction Date: $date")
                     }
                 }
 

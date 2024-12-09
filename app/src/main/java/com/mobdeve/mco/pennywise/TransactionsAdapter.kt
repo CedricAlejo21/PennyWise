@@ -14,6 +14,7 @@ class TransactionsAdapter(private val transactions: List<Transaction>) :
         val description: TextView = view.findViewById(R.id.transaction_description)
         val category: TextView = view.findViewById(R.id.transaction_category)
         val price: TextView = view.findViewById(R.id.transaction_price)
+        val date: TextView = view.findViewById(R.id.transaction_date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
@@ -27,19 +28,10 @@ class TransactionsAdapter(private val transactions: List<Transaction>) :
         holder.description.text = transaction.description
         holder.category.text = transaction.category
         holder.price.text = "₱${transaction.price}"
+        holder.date.text = transaction.date
     }
 
     override fun getItemCount(): Int = transactions.size
-
-    private fun getIconResource(category: String?): Int {
-        return when (category) {
-            "Food" -> R.drawable.icon_food
-            "Shopping" -> R.drawable.icon_shopping
-            "Travel" -> R.drawable.icon_travel
-            else -> R.drawable.icon_default
-        }
-    }
 }
-
 
 
