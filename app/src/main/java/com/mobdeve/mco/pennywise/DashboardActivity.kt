@@ -1,5 +1,6 @@
 package com.mobdeve.mco.pennywise
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -233,7 +234,7 @@ class DashboardActivity : ComponentActivity() {
         val totalTransactionsTextView: TextView = findViewById(R.id.total_transactions)
 
         // Update UI elements
-        balanceTextView.text = "₱${String.format("%.2f", 13227.85 - totalExpenses)}"
+        balanceTextView.text = "₱${String.format("%.2f", 0 - totalExpenses)}"
         totalExpensesTextView.text = "Total Expenses: ₱${String.format("%.2f", totalExpenses)}"
         totalTransactionsTextView.text = "Total Transactions: $transactionCount"
     }
@@ -242,23 +243,31 @@ class DashboardActivity : ComponentActivity() {
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
             val uid = currentUser.uid
-
-            // Delete user data from the database
-            databaseRef.removeValue().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Delete user from Firebase Authentication
-                    currentUser.delete().addOnCompleteListener { deleteTask ->
-                        if (deleteTask.isSuccessful) {
-                            Toast.makeText(this, "Account deleted successfully!", Toast.LENGTH_SHORT).show()
-                            redirectToLogin()
+            AlertDialog.Builder(this)
+                .setTitle("Delete Account")
+                .setMessage("Are you sure you want to delete your account? This action cannot be undone.")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    databaseRef.removeValue().addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            currentUser.delete().addOnCompleteListener { deleteTask ->
+                                if (deleteTask.isSuccessful) {
+                                    Toast.makeText(this, "Account deleted successfully!", Toast.LENGTH_SHORT).show()
+                                    redirectToLogin()
+                                } else {
+                                    Toast.makeText(this, "Failed to delete account: ${deleteTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                                }
+                            }
                         } else {
-                            Toast.makeText(this, "Failed to delete account: ${deleteTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Failed to delete user data: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
                     }
-                } else {
-                    Toast.makeText(this, "Failed to delete user data: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
-            }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
         }
     }
 

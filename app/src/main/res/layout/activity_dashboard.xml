@@ -80,6 +80,18 @@
         </LinearLayout>
 
         <!-- Transactions Section -->
+
+        <Button
+            android:id="@+id/btn_add_transaction2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btn_rounded_blue"
+            android:backgroundTint="#4682B4"
+            android:text="Edit Funds"
+            android:textColor="@android:color/white" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,17 +126,6 @@
             android:background="@drawable/btn_rounded_blue"
             android:backgroundTint="#4682B4"
             android:text="Add Transaction"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/btn_add_transaction2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/btn_rounded_blue"
-            android:backgroundTint="#4682B4"
-            android:text="Add Funds"
             android:textColor="@android:color/white" />
 
         <TextView
