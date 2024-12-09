@@ -82,7 +82,7 @@
         <!-- Transactions Section -->
 
         <Button
-            android:id="@+id/btn_add_transaction2"
+            android:id="@+id/btn_edit_funds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

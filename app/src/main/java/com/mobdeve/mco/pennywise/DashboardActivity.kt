@@ -3,6 +3,7 @@ package com.mobdeve.mco.pennywise
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.google.firebase.database.*
 import com.github.mikephil.charting.charts.BarChart
@@ -48,6 +50,11 @@ class DashboardActivity : ComponentActivity() {
             Log.d("DashboardActivity", "Add Transaction button clicked!")
             val intent = Intent(this, AddTransactionActivity::class.java)
             startActivity(intent)
+        }
+
+        val editFundsButton = findViewById<Button>(R.id.btn_edit_funds)
+        editFundsButton.setOnClickListener {
+            showEditFundsDialog()
         }
 
         toggleButton.setOnClickListener {
@@ -116,7 +123,7 @@ class DashboardActivity : ComponentActivity() {
 
         val barData = BarData(dataSet)
         barChart.data = barData
-        barChart.invalidate() // Refresh the chart
+        barChart.invalidate()
     }
 
     private fun fetchTransactions() {
@@ -304,5 +311,40 @@ class DashboardActivity : ComponentActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+    }
+
+    private fun showEditFundsDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Edit Funds")
+
+        val input = EditText(this)
+        input.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+
+        val balanceTextView: TextView = findViewById(R.id.balance)
+        val currentBalance = balanceTextView.text.toString().replace("₱", "").toDoubleOrNull() ?: 0.0
+        input.setText(currentBalance.toString())
+
+        builder.setView(input)
+
+        builder.setPositiveButton("OK") { dialog, _ ->
+            val newAmount = input.text.toString().toDoubleOrNull()
+            if (newAmount != null) {
+                updateBalance(newAmount)
+            } else {
+                Toast.makeText(this, "Invalid amount", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.cancel()
+        }
+
+        builder.show()
+    }
+
+    private fun updateBalance(newAmount: Double) {
+        val balanceTextView: TextView = findViewById(R.id.balance)
+        balanceTextView.text = "₱${String.format("%.2f", newAmount)}"
     }
 }
