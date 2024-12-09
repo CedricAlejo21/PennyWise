@@ -17,6 +17,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.database.*
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 
 class DashboardActivity : ComponentActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -66,6 +71,22 @@ class DashboardActivity : ComponentActivity() {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show()
             finish()
         }
+
+        val barChart = findViewById<BarChart>(R.id.category_summary2)
+
+        val entries = listOf(
+            BarEntry(1f, 10f),
+            BarEntry(2f, 20f),
+            BarEntry(3f, 30f),
+            BarEntry(4f, 40f)
+        )
+
+        val dataSet = BarDataSet(entries, "Category Totals")
+        dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
+
+        val barData = BarData(dataSet)
+        barChart.data = barData
+        barChart.invalidate() // Refresh the chart
     }
 
     private fun fetchTransactions() {

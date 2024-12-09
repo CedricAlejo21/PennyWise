@@ -120,17 +120,13 @@
         android:textColor="#808080"
         android:textSize="16sp" />
 
-    <TextView
+    <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/category_summary2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/white_rounded_bg"
-        android:gravity="center|left"
-        android:padding="8dp"
-        android:text="Placeholder for Chart"
-        android:textColor="#808080"
-        android:textSize="16sp" />
+        android:padding="8dp" />
 
     <Button
         android:id="@+id/btn_delete_account2"
