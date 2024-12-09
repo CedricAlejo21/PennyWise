@@ -224,6 +224,9 @@ class DashboardActivity : ComponentActivity() {
             categoryTotals.forEach { (category, total) ->
                 stringBuilder.append("$category: ₱${String.format("%.2f", total)}\n")
             }
+            if (stringBuilder.isNotEmpty()) {
+                stringBuilder.setLength(stringBuilder.length - 1)
+            }
         }
 
         categorySummaryTextView.text = stringBuilder.toString()

@@ -135,7 +135,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/white_rounded_bg"
             android:gravity="center|left"
-            android:padding="8dp"
+            android:padding="16dp"
             android:text="Category Totals will appear here"
             android:textColor="#808080"
             android:textSize="16sp" />
