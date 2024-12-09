@@ -9,7 +9,11 @@
         android:id="@+id/transaction_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/et_background"
         android:hint="Description"
+        android:minHeight="48dp"
+        android:paddingStart="15dp"
+        android:textColor="#90CAF9"
         android:textColorHint="#8E8E8E" />
 
     <EditText
@@ -17,7 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/et_background"
         android:hint="Category"
+        android:minHeight="48dp"
+        android:paddingStart="15dp"
+        android:textColor="#90CAF9"
         android:textColorHint="#8E8E8E" />
 
     <EditText
@@ -25,8 +33,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/et_background"
         android:hint="Price"
         android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:paddingStart="15dp"
+        android:textColor="#90CAF9"
         android:textColorHint="#8E8E8E" />
 
     <EditText
@@ -34,7 +46,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/et_background"
         android:hint="Location"
+        android:minHeight="48dp"
+        android:paddingStart="15dp"
+        android:textColor="#90CAF9"
         android:textColorHint="#8E8E8E" />
 
     <Button
@@ -43,5 +59,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_rounded_blue"
-        android:text="Done" />
+        android:text="Done"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_rounded_blue"
+        android:text="Back"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

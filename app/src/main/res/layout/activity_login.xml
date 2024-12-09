@@ -29,7 +29,7 @@
         android:minHeight="48dp"
         android:padding="12dp"
         android:textColor="#90CAF9"
-        android:textColorHint="#90CAF9" />
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/login_password"
@@ -43,7 +43,7 @@
         android:minHeight="48dp"
         android:padding="12dp"
         android:textColor="#90CAF9"
-        android:textColorHint="#90CAF9" />
+        android:textColorHint="#8E8E8E" />
 
     <!-- Login Button -->
     <Button
@@ -58,15 +58,6 @@
         android:textStyle="bold" />
 
     <!-- Forgot Password Link -->
-    <TextView
-        android:id="@+id/forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:text="@string/forgot_password"
-        android:textColor="#90CAF9"
-        android:textSize="14sp" />
 
     <!-- Sign Up Link -->
     <TextView

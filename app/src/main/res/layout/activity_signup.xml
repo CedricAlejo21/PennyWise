@@ -28,7 +28,7 @@
         android:inputType="textPersonName"
         android:padding="12dp"
         android:textColor="#90CAF9"
-        android:textColorHint="#90CAF9" />
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/signup_email"
@@ -41,7 +41,7 @@
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:textColor="#90CAF9"
-        android:textColorHint="#90CAF9" />
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/signup_password"
@@ -54,7 +54,7 @@
         android:inputType="textPassword"
         android:padding="12dp"
         android:textColor="#90CAF9"
-        android:textColorHint="#90CAF9" />
+        android:textColorHint="#8E8E8E" />
 
     <EditText
         android:id="@+id/signup_confirm_password"
@@ -67,7 +67,7 @@
         android:inputType="textPassword"
         android:padding="12dp"
         android:textColor="#90CAF9"
-        android:textColorHint="#90CAF9" />
+        android:textColorHint="#8E8E8E" />
 
     <Button
         android:id="@+id/btn_signup"
@@ -86,6 +86,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/already_have_an_account_log_in"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="#90CAF9"
         android:textSize="14sp" />
 </LinearLayout>

@@ -20,6 +20,7 @@ class AddTransactionActivity : ComponentActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         val addButton = findViewById<Button>(R.id.btn_done)
+        val backButton = findViewById<Button>(R.id.btn_back)
 
         addButton.setOnClickListener {
             val description = findViewById<EditText>(R.id.transaction_description).text.toString()
@@ -32,6 +33,10 @@ class AddTransactionActivity : ComponentActivity() {
             } else {
                 Toast.makeText(this, "Please fill in all fields!", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        backButton.setOnClickListener {
+            finish() // Close the activity and return to the previous screen
         }
     }
 

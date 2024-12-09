@@ -65,8 +65,37 @@ class DashboardActivity : ComponentActivity() {
             databaseRef = FirebaseDatabase.getInstance("https://pennywise-f2ed7-default-rtdb.asia-southeast1.firebasedatabase.app")
                 .getReference("users").child(uid)
 
+            findViewById<Button>(R.id.btn_delete_account).setOnClickListener {
+                deleteAccount()
+            }
+
+            findViewById<Button>(R.id.btn_logout).setOnClickListener {
+                logout()
+            }
+
+            databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val userData = snapshot.value as? Map<String, Any>
+                    val profile = userData?.get("profile") as? Map<String, Any>
+                    val name = profile?.get("name") as? String
+
+                    if (name != null) {
+                        Log.d("DashboardActivity", "Current User's Name: $name")
+                        val welcomeTextView: TextView = findViewById(R.id.welcome_text)
+                        welcomeTextView.text = "Welcome to PennyWise, $name!"
+                    } else {
+                        Log.e("DashboardActivity", "Name not found in profile")
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@DashboardActivity, "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+
             fetchTransactions()
-            calculateTotalSpendingByCategory() // Add this here
+            calculateTotalSpendingByCategory()
+            Log.d("DashboardActivity", "User logged in!")
         } else {
             Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show()
             finish()
@@ -209,4 +238,40 @@ class DashboardActivity : ComponentActivity() {
         totalTransactionsTextView.text = "Total Transactions: $transactionCount"
     }
 
+    private fun deleteAccount() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val uid = currentUser.uid
+
+            // Delete user data from the database
+            databaseRef.removeValue().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Delete user from Firebase Authentication
+                    currentUser.delete().addOnCompleteListener { deleteTask ->
+                        if (deleteTask.isSuccessful) {
+                            Toast.makeText(this, "Account deleted successfully!", Toast.LENGTH_SHORT).show()
+                            redirectToLogin()
+                        } else {
+                            Toast.makeText(this, "Failed to delete account: ${deleteTask.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Failed to delete user data: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun logout() {
+        firebaseAuth.signOut()
+        Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show()
+        redirectToLogin()
+    }
+
+    private fun redirectToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
 }

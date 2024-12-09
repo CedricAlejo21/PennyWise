@@ -1,149 +1,171 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#212121"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Welcome Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_rounded_bg"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:overScrollMode="ifContentScrolls">
 
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="Welcome Back to PennyWise, User!"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/plains_villager_base" />
-    </LinearLayout>
-
-    <!-- Balance and Expense Info -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/white_rounded_bg"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:text="₱13,227.85"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="24sp" />
-
+        <!-- Welcome Section -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@drawable/white_rounded_bg"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
             <TextView
-                android:id="@+id/total_expenses"
+                android:id="@+id/welcome_text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total Expenses: ₱1,000.52"
-                android:textSize="16sp" />
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Welcome to PennyWise, User!"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/total_transactions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Total Transactions: 20"
-                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/et_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
         </LinearLayout>
 
-    </LinearLayout>
-
-    <!-- Transactions Section -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_toggle_transactions"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/btn_rounded_blue"
-            android:padding="2dp"
-            android:text="Show Transactions"
-            android:textColor="#FFFFFF" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/transactions_recycler_view"
+        <!-- Balance and Expense Info -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_marginTop="16dp"
+            android:background="@drawable/white_rounded_bg"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="₱13,227.85"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/total_expenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Expenses: ₱1,000.52"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/total_transactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Transactions: 20"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Transactions Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_toggle_transactions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_rounded_blue"
+                android:padding="2dp"
+                android:text="Show Transactions"
+                android:textColor="#FFFFFF" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/transactions_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Add Transaction Button -->
+
+        <Button
+            android:id="@+id/btn_add_transaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btn_rounded_blue"
+            android:backgroundTint="#4682B4"
+            android:text="Add Transaction"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_add_transaction2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/btn_rounded_blue"
+            android:backgroundTint="#4682B4"
+            android:text="Add Funds"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/category_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/white_rounded_bg"
+            android:gravity="center|left"
+            android:padding="8dp"
+            android:text="Category Totals will appear here"
+            android:textColor="#808080"
+            android:textSize="16sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/category_summary2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/white_rounded_bg"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_delete_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_rounded_red"
+            android:text="Delete Account"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_rounded_blue"
+            android:text="LOG OUT"
+            android:textColor="#FFFFFF" />
+
     </LinearLayout>
 
-    <!-- Add Transaction Button -->
-    <Button
-        android:id="@+id/btn_add_transaction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_rounded_blue"
-        android:backgroundTint="#4682B4"
-        android:text="Add Transaction"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/category_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/white_rounded_bg"
-        android:gravity="center|left"
-        android:padding="8dp"
-        android:text="Category Totals will appear here"
-        android:textColor="#808080"
-        android:textSize="16sp" />
-
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/category_summary2"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/white_rounded_bg"
-        android:padding="8dp" />
-
-    <Button
-        android:id="@+id/btn_delete_account2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/btn_rounded_red"
-        android:text="Delete Account"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_logout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/btn_rounded_blue"
-        android:text="LOG OUT"
-        android:textColor="#FFFFFF" />
-
-</LinearLayout>
+</ScrollView>
